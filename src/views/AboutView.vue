@@ -33,6 +33,20 @@
       <li v-for="user in online.users" :key="user.id">{{ user.name }}</li>
     </ul>
   </div>
+
+  <!-- <form
+    action="https://friendly-carnival-qr7rxj6j4gw39q49-3000.app.github.dev/"
+    method="post"
+  >
+    <label for="name"></label>
+    <input type="text" name="name" v-model="user.name" />
+    <button type="submit" @click="addAPI">send</button>
+  </form> -->
+  <form>
+    <input type="text" id="name" name="name" placeholder="Name" />
+    <input type="text" id="age" name="age" placeholder="Age" />
+    <button type="submit" @click="testAPI">Submit</button>
+  </form>
 </template>
 
 <script>
@@ -60,6 +74,9 @@ export default {
         { id: 2, name: "Mrs. Smith", age: 39 },
         { id: 3, name: "Mr. Doe", age: 41 },
       ],
+      user: {
+        name: "",
+      },
     };
   },
   methods: {
@@ -67,9 +84,52 @@ export default {
       console.log("custom");
       this.counter.increment();
     },
+    // addAPI(e) {
+    //   e.preventDefault();
+    //   console.log("addAPI");
+    //   fetch("https://friendly-carnival-qr7rxj6j4gw39q49-3000.app.github.dev/", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(this.user),
+    //   });
+    //   // .then((response) => response.json())
+    //   // .then((json) => {
+    //   //   console.log(json);
+    //   //   this.online.addUser(json);
+    //   // });
+    // },
+
+    testAPI() {
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let name = document.querySelector("#name").value;
+        let age = document.querySelector("#age").value;
+        const formData = { name, age };
+        fetch(
+          "https://friendly-carnival-qr7rxj6j4gw39q49-3000.app.github.dev/",
+          {
+            method: "post",
+            body: JSON.stringify(formData),
+            headers: {
+              "Content-Type": "application/json",
+              // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          }
+        )
+          .then((res) => {
+            return res.text();
+          })
+          .then((data) => {
+            console.log(data);
+          });
+      });
+    },
   },
   created() {
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://friendly-carnival-qr7rxj6j4gw39q49-3000.app.github.dev/")
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
