@@ -22,12 +22,12 @@ export default {
     submitCreate() {
       const codespaces = useCodeSpacesStore();
       const form = document.querySelector("form");
-      form.addEventListener("submit", (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
         let name = document.querySelector("#name").value;
         let age = document.querySelector("#age").value;
         const formData = { name, age };
-        fetch(`${codespaces.csURL}api/account/add`, {
+        await fetch(`${codespaces.csURL}api/account/add`, {
           method: "post",
           body: JSON.stringify(formData),
           headers: {
@@ -43,6 +43,7 @@ export default {
           .then((data) => {
             console.log(data);
           });
+        location.reload();
       });
     },
   },

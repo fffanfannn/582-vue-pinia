@@ -57,15 +57,15 @@ export default {
       console.log(this.user);
     },
 
-    submitDelete(e) {
+    async submitDelete(e) {
       console.log(e.target.id);
       const codespaces = useCodeSpacesStore();
-      fetch(`${codespaces.csURL}api/account/delete/${e.target.id}`, {
+      await fetch(`${codespaces.csURL}api/account/delete/${e.target.id}`, {
         method: "delete",
       })
         .then((res) => {
           console.log(res);
-          return res.text();
+          // return res.text();
         })
         .then((data) => {
           console.log(data);
