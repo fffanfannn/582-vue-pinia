@@ -27,13 +27,13 @@ section {
   height: 100vh;
 }
 aside {
-  width: 30%;
-  background-color: rgb(229, 241, 241);
+  width: 20%;
+  background-color: rgb(246, 253, 253);
 }
 div {
-  width: 70%;
+  width: 80%;
 }
 header {
-  background-color: rgb(214, 230, 230);
+  background-color: rgb(248, 248, 248);
 }
 </style>

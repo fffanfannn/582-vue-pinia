@@ -40,7 +40,7 @@ export default {
             } else {
               alert(JSON.stringify(getStatusMsg));
             }
-            return res.text();
+            // return res.text();
           })
           .then((data) => {
             console.log(data);

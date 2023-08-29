@@ -11,27 +11,30 @@
 </template>
 
 <script>
+import { useCodeSpacesStore } from "@/store/codespaceURL";
 export default {
   name: "DialogComp",
+  setup() {
+    const codespaces = useCodeSpacesStore();
+    return { codespaces };
+  },
   methods: {
     submitCreate() {
+      const codespaces = useCodeSpacesStore();
       const form = document.querySelector("form");
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         let name = document.querySelector("#name").value;
         let age = document.querySelector("#age").value;
         const formData = { name, age };
-        fetch(
-          "https://glowing-space-happiness-x65647x7qw4c6j4g-3000.app.github.dev/api/account/add",
-          {
-            method: "post",
-            body: JSON.stringify(formData),
-            headers: {
-              "Content-Type": "application/json",
-              // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-          }
-        )
+        fetch(`${codespaces.csURL}api/account/add`, {
+          method: "post",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        })
           .then((res) => {
             console.log(res);
             alert("Account item created successfully");

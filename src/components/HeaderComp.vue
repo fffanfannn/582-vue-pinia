@@ -21,25 +21,25 @@ export default {
     return { online };
   },
 
-  created() {
-    console.log("11");
-    fetch(
-      "https://glowing-space-happiness-x65647x7qw4c6j4g-3000.app.github.dev/api/user/login",
-      {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("created() data:", data);
-        for (let user of data) {
-          this.online.addUser(user);
-        }
-      });
-  },
+  //   created() {
+  //     console.log("11");
+  //     fetch(
+  //       "https://glowing-space-happiness-x65647x7qw4c6j4g-3000.app.github.dev/api/user/login",
+  //       {
+  //         method: "post",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           // 'Content-Type': 'application/x-www-form-urlencoded',
+  //         },
+  //       }
+  //     )
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log("created() data:", data);
+  //         for (let user of data) {
+  //           this.online.addUser(user);
+  //         }
+  //       });
+  //   },
 };
 </script>

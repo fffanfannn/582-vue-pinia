@@ -39,7 +39,7 @@ export default {
             } else {
               alert("Register failed");
             }
-            return res.text();
+            // return res.text();
           })
           .then((data) => {
             console.log("testAPI() data:", data);
