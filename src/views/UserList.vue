@@ -14,8 +14,9 @@
     </li>
   </ul>
   <DialogComp v-if="createDialog"></DialogComp>
-  <EditComp v-show="editDialog" :userData="userData"></EditComp>
+  <EditComp v-if="editDialog" :userData="userData"></EditComp>
   <DetailsComp v-show="detailsDialog"></DetailsComp>
+  <SearchComp v-show="searchDialog"></SearchComp>
 </template>
 
 <script>
@@ -24,6 +25,8 @@ import { useCodeSpacesStore } from "@/store/codespaceURL";
 import DialogComp from "@/components/DialogComp.vue";
 import EditComp from "@/components/EditComp.vue";
 import DetailsComp from "@/components/DetailsComp.vue";
+import SearchComp from "@/components/SearchComp.vue";
+
 export default {
   name: "HeaderComp",
   setup() {
@@ -37,6 +40,7 @@ export default {
       createDialog: false,
       editDialog: false,
       detailsDialog: false,
+      searchDialog: false,
       userData: {
         name: "",
         age: "",
@@ -48,9 +52,13 @@ export default {
     DialogComp,
     EditComp,
     DetailsComp,
+    SearchComp,
   },
 
   methods: {
+    searchBtn() {
+      this.searchDialog = !this.searchDialog;
+    },
     addBtn() {
       this.createDialog = !this.createDialog;
     },
