@@ -22,9 +22,6 @@
       <th>Update</th>
       <th>Delete</th>
       <th>Details</th>
-      <!-- <td>
-        <button :id="user._id" @click="submitDetailLink">details-links</button>
-      </td> -->
     </tr>
     <tr v-for="user in online.users" :key="user.id">
       <td id="name">{{ user.name }}</td>
@@ -32,18 +29,18 @@
       <td><button :id="user._id" @click="editBtn(user)">update</button></td>
       <td><button :id="user._id" @click="submitDelete">delete</button></td>
       <td><button :id="user._id" @click="submitDetail">details</button></td>
-      <!-- <td>
+      <td>
         <button :id="user._id" @click="submitDetailLink">details-links</button>
-      </td> -->
+      </td>
     </tr>
   </table>
 
   <DialogComp v-if="createDialog"></DialogComp>
   <EditComp v-if="editDialog" :userData="userData"></EditComp>
-  <DetailsComp
+  <!-- <DetailsComp
     v-if="detailsDialog"
     :detailResults="detailResults"
-  ></DetailsComp>
+  ></DetailsComp> -->
   <SearchComp v-show="searchDialog"></SearchComp>
 </template>
 
@@ -52,7 +49,7 @@ import { useOnlineStore } from "@/store/online";
 import { useCodeSpacesStore } from "@/store/codespaceURL";
 import DialogComp from "@/components/DialogComp.vue";
 import EditComp from "@/components/EditComp.vue";
-import DetailsComp from "@/components/DetailsComp.vue";
+// import DetailsComp from "@/components/DetailsComp.vue";
 import SearchComp from "@/components/SearchComp.vue";
 
 export default {
@@ -80,7 +77,7 @@ export default {
   components: {
     DialogComp,
     EditComp,
-    DetailsComp,
+    // DetailsComp,
     SearchComp,
   },
 
