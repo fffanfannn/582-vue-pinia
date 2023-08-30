@@ -1,10 +1,15 @@
 <template>
   <div>
     <h4>searchComp.vue</h4>
-    <form action="">
-      <input type="text" v-model="searchInput" id="name" name="name" />
-      <button type="submit" @click="submitSearch">Search</button>
-    </form>
+
+    <input
+      type="text"
+      v-model="searchInput"
+      id="name"
+      name="name"
+      @input="searchBtn"
+    />
+
     <button>close</button>
 
     <div v-if="searchInput">
@@ -37,15 +42,11 @@ export default {
     };
   },
   methods: {
-    submitSearch(e) {
-      e.preventDefault();
+    searchBtn() {
       this.searchResults = [];
-      const form = document.querySelector("form");
-      console.log(form);
-      console.log(this.searchInput);
-      console.log("online.user", this.online.users);
       for (let user of this.online.users) {
-        if (user.name == this.searchInput) {
+        let searchRegExp = new RegExp(this.searchInput, "gi");
+        if (searchRegExp.test(user.name)) {
           console.log(user);
           this.searchResults.push(user);
           console.log(this.searchResults);
