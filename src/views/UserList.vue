@@ -8,12 +8,12 @@
     <li v-for="user in online.users" :key="user.id">
       <div id="name">{{ user.name }}</div>
       <div id="age">{{ user.age }}</div>
-      <button :id="user._id" @click="editBtn">update</button>
+      <button :id="user._id" @click="editBtn(user)">update</button>
       <button :id="user._id" @click="submitDelete">delete</button>
       <button :id="user._id" @click="submitDetail">details</button>
     </li>
   </ul>
-  <DialogComp v-show="createDialog"></DialogComp>
+  <DialogComp v-if="createDialog"></DialogComp>
   <EditComp v-show="editDialog" :userData="userData"></EditComp>
   <DetailsComp v-show="detailsDialog"></DetailsComp>
 </template>
@@ -55,12 +55,9 @@ export default {
       this.createDialog = !this.createDialog;
     },
 
-    editBtn(event) {
+    editBtn(user) {
       this.editDialog = !this.editDialog;
-      this.userData = this.online.users.find(
-        (user) => user._id === event.target.id
-      );
-      console.log(this.userData);
+      this.userData = user;
     },
 
     async submitDelete(e) {

@@ -42,7 +42,6 @@ export default {
         console.log(formData, "formData");
         await fetch(`${codespaces.csURL}api/account/add`, {
           method: "post",
-
           body: JSON.stringify(formData),
           headers: {
             "Content-Type": "application/json",
