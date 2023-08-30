@@ -5,6 +5,7 @@ import UserList from "../views/UserList.vue";
 import Register from "../views/RegisterView.vue";
 import Login from "../views/LoginView.vue";
 import NotFound from "../views/NotFound.vue";
+import DetailsComp from "../components/DetailsComp.vue";
 
 const routes = [
   {
@@ -22,6 +23,11 @@ const routes = [
         path: "userlist",
         name: "Userlist",
         component: UserList,
+      },
+      {
+        path: "userlist/:id",
+        name: "ItemDetails",
+        component: DetailsComp,
       },
     ],
   },

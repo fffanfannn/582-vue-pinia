@@ -11,6 +11,9 @@
       <button :id="user._id" @click="editBtn(user)">update</button>
       <button :id="user._id" @click="submitDelete">delete</button>
       <button :id="user._id" @click="submitDetail">details</button>
+      <router-link to="userlist/:id" :id="user._id" @click="submitDetail"
+        >details</router-link
+      >
     </li>
   </ul>
   <DialogComp v-if="createDialog"></DialogComp>

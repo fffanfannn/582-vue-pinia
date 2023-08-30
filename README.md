@@ -1,4 +1,4 @@
-# 582-vue-pinia
+# p2-funds-management-frontend-2
 
 ## Project setup
 ```
