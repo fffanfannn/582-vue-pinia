@@ -15,7 +15,10 @@
   </ul>
   <DialogComp v-if="createDialog"></DialogComp>
   <EditComp v-if="editDialog" :userData="userData"></EditComp>
-  <DetailsComp v-show="detailsDialog"></DetailsComp>
+  <DetailsComp
+    v-if="detailsDialog"
+    :detailResults="detailResults"
+  ></DetailsComp>
   <SearchComp v-show="searchDialog"></SearchComp>
 </template>
 
@@ -45,6 +48,7 @@ export default {
         name: "",
         age: "",
       },
+      detailResults: {},
     };
   },
 
@@ -96,6 +100,8 @@ export default {
         })
         .then((data) => {
           console.log(data);
+          this.detailResults = JSON.parse(data);
+          console.log("detailResults", this.detailResults);
         });
 
       this.detailsDialog = !this.detailsDialog;
