@@ -4,18 +4,40 @@
   </div>
   <button @click="addBtn">create</button>
   <button @click="searchBtn">search</button>
-  <ul>
+  <!-- <ul>
     <li v-for="user in online.users" :key="user.id">
       <div id="name">{{ user.name }}</div>
       <div id="age">{{ user.age }}</div>
       <button :id="user._id" @click="editBtn(user)">update</button>
       <button :id="user._id" @click="submitDelete">delete</button>
       <button :id="user._id" @click="submitDetail">details</button>
-      <router-link to="userlist/:id" :id="user._id" @click="submitDetail"
-        >details</router-link
-      >
+      <button :id="user._id" @click="submitDetailLink">details-links</button>
     </li>
-  </ul>
+  </ul> -->
+
+  <table>
+    <tr>
+      <th>Item 1</th>
+      <th>Item 2</th>
+      <th>Update</th>
+      <th>Delete</th>
+      <th>Details</th>
+      <!-- <td>
+        <button :id="user._id" @click="submitDetailLink">details-links</button>
+      </td> -->
+    </tr>
+    <tr v-for="user in online.users" :key="user.id">
+      <td id="name">{{ user.name }}</td>
+      <td id="age">{{ user.age }}</td>
+      <td><button :id="user._id" @click="editBtn(user)">update</button></td>
+      <td><button :id="user._id" @click="submitDelete">delete</button></td>
+      <td><button :id="user._id" @click="submitDetail">details</button></td>
+      <!-- <td>
+        <button :id="user._id" @click="submitDetailLink">details-links</button>
+      </td> -->
+    </tr>
+  </table>
+
   <DialogComp v-if="createDialog"></DialogComp>
   <EditComp v-if="editDialog" :userData="userData"></EditComp>
   <DetailsComp
@@ -91,6 +113,23 @@ export default {
 
       // this.$router.push({ name: "Userlist" });
       location.reload();
+    },
+
+    async submitDetailLink(e) {
+      console.log(e.target.id);
+      const codespaces = useCodeSpacesStore();
+      await fetch(`${codespaces.csURL}api/account/${e.target.id}`)
+        .then((res) => {
+          console.log(res);
+          return res.text();
+        })
+        .then((data) => {
+          console.log(data);
+          this.detailResults = JSON.parse(data);
+          console.log("detailResults", this.detailResults);
+        });
+
+      this.$router.push({ name: "ItemDetails", params: { id: e.target.id } });
     },
 
     submitDetail(e) {

@@ -5,9 +5,9 @@
       <router-link to="/main/home">Home</router-link>
       <router-link to="/main/userList">User-List</router-link>
     </div>
-    <ul>
+    <!-- <ul>
       <li v-for="user in online.users" :key="user.id">{{ user.name }}</li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 

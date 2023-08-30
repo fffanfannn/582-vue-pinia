@@ -10,8 +10,6 @@
       @input="searchBtn"
     />
 
-    <button>close</button>
-
     <div v-if="searchInput">
       <div v-for="item in searchResults" :key="item._id">
         <p>{{ item.name }}</p>
