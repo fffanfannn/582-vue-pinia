@@ -2,8 +2,14 @@
   <div>
     <h4>dialogComp.vue</h4>
     <form action="">
-      <input type="text" id="name" name="name" placeholder="Name" />
-      <input type="text" id="age" name="age" placeholder="Age" />
+      <input
+        type="text"
+        v-model="name"
+        id="name"
+        name="name"
+        placeholder="Name"
+      />
+      <input type="text" v-model="age" id="age" name="age" placeholder="Age" />
       <button type="submit" @click="submitCreate">Create</button>
     </form>
     <button>close</button>
@@ -18,17 +24,25 @@ export default {
     const codespaces = useCodeSpacesStore();
     return { codespaces };
   },
+  data() {
+    return {
+      name: "",
+      age: "",
+    };
+  },
   methods: {
     submitCreate() {
       const codespaces = useCodeSpacesStore();
       const form = document.querySelector("form");
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        let name = document.querySelector("#name").value;
-        let age = document.querySelector("#age").value;
-        const formData = { name, age };
+        // let name = document.querySelector("#name1").value;
+        // let age = document.querySelector("#age1").value;
+        const formData = { name: this.name, age: this.age };
+        console.log(formData, "formData");
         await fetch(`${codespaces.csURL}api/account/add`, {
           method: "post",
+
           body: JSON.stringify(formData),
           headers: {
             "Content-Type": "application/json",

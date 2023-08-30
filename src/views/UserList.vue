@@ -6,15 +6,15 @@
   <button @click="searchBtn">search</button>
   <ul>
     <li v-for="user in online.users" :key="user.id">
-      <div>{{ user.name }}</div>
-      <div>{{ user.age }}</div>
+      <div id="name">{{ user.name }}</div>
+      <div id="age">{{ user.age }}</div>
       <button :id="user._id" @click="editBtn">update</button>
       <button :id="user._id" @click="submitDelete">delete</button>
       <button :id="user._id" @click="submitDetail">details</button>
     </li>
   </ul>
   <DialogComp v-show="createDialog"></DialogComp>
-  <EditComp v-show="editDialog"></EditComp>
+  <EditComp v-show="editDialog" :userData="userData"></EditComp>
   <DetailsComp v-show="detailsDialog"></DetailsComp>
 </template>
 
@@ -37,7 +37,10 @@ export default {
       createDialog: false,
       editDialog: false,
       detailsDialog: false,
-      user: {},
+      userData: {
+        name: "",
+        age: "",
+      },
     };
   },
 
@@ -52,9 +55,12 @@ export default {
       this.createDialog = !this.createDialog;
     },
 
-    editBtn() {
+    editBtn(event) {
       this.editDialog = !this.editDialog;
-      console.log(this.user);
+      this.userData = this.online.users.find(
+        (user) => user._id === event.target.id
+      );
+      console.log(this.userData);
     },
 
     async submitDelete(e) {

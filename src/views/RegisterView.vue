@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { useCodeSpacesStore } from "@/store/codespaceURL";
 export default {
   name: "RegisterView",
   methods: {
@@ -20,17 +21,15 @@ export default {
         let name = document.querySelector("#name").value;
         let age = document.querySelector("#age").value;
         const formData = { name, age };
-        fetch(
-          "https://glowing-space-happiness-x65647x7qw4c6j4g-3000.app.github.dev/api/user/register",
-          {
-            method: "post",
-            body: JSON.stringify(formData),
-            headers: {
-              "Content-Type": "application/json",
-              // 'Content-Type': 'application/x-www-form-urlencoded',
-            },
-          }
-        )
+        const codespaces = useCodeSpacesStore();
+        fetch(`${codespaces.csURL}api/user/register`, {
+          method: "post",
+          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        })
           .then((res) => {
             console.log("testAPI() res:", res);
             if (res.status == 200) {

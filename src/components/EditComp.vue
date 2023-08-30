@@ -13,6 +13,9 @@
 <script>
 export default {
   name: "EditComp",
+  props: {
+    userData: Object,
+  },
   methods: {
     editCreate() {
       const form = document.querySelector("form");
@@ -42,6 +45,9 @@ export default {
           });
       });
     },
+  },
+  created() {
+    console.log(this.userData.name);
   },
 };
 </script>
